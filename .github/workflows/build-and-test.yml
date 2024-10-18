@@ -75,12 +75,14 @@ jobs:
       - riscv-builders
       - rve-v
     steps:
+      - name: Install Dependencies
+        run: |
+          apt install parallel --no-install-recommends -yq
       - uses: actions/download-artifact@v4
         with:
           path: out/v256x64machine/
       - name: Execute test
         run: |
           set -xe
-          apt install parallel
           find out/v256x64machine -type f -executable -print > bin.list
           cat bin.list | parallel -j$(nproc) {}
