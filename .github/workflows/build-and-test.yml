@@ -77,6 +77,8 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          path: out/v256x64machine/tests/stage2
-      - name: Display structure of downloaded files
-        run: ls -R out/v256x64machine/tests/stage2/*
+          path: out/v256x64machine/
+      - name: Execute test
+        run: |
+          find out/v256x64machine -type f -executable -print
+          find out/v256x64machine -type f -executable {} \;
