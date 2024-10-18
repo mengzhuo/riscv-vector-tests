@@ -80,5 +80,7 @@ jobs:
           path: out/v256x64machine/
       - name: Execute test
         run: |
-          find out/v256x64machine -type f -executable -print
-          find out/v256x64machine -type f -executable {} \;
+          set -xe
+          apt install parallel
+          find out/v256x64machine -type f -executable -print > bin.list
+          cat bin.list | parallel -j$(nproc) {}
