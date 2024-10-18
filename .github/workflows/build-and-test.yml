@@ -69,6 +69,8 @@ jobs:
             out/v256x64machine/bin/stage2/*
 
   test-on-builders:
+    needs: check
+    if: needs.check.result == 'success'
     runs-on:
       - riscv-builders
       - rve-v
